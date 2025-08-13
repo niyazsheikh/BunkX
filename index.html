@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AttendX — Minimal Attendance PWA</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Calculator</title>
+  <link rel="stylesheet" href="style.css">
+
+
+
+  <link rel="stylesheet" href="styles.css" />
+  
+
+  <meta name="theme-color" content="#6b46c1" />
+
+  <!-- Apple meta -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+  <script>
+    // quick inline check for service worker support (registration done in app.js)
+    if ('serviceWorker' in navigator) {
+      // nothing here — registration in app.js
+    }
+  </script>
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div class="logo">
+        <div class="logo-mark">AX</div>
+        <div class="logo-text">AttendX</div>
+      </div>
+      <div class="header-actions">
+        <button id="add-subject-btn" class="btn">+ Add Subject</button>
+        <button id="clear-btn" class="btn ghost">Reset</button>
+      </div>
+    </header>
+
+    <section class="card calc-card">
+      <h2>Overall Attendance</h2>
+      <div class="grid">
+        <label>
+          Total classes so far
+          <input id="total-classes" type="number" min="0" value="40" />
+        </label>
+        <label>
+          Attended classes
+          <input id="attended-classes" type="number" min="0" value="36" />
+        </label>
+        <label>
+          Upcoming planned leaves (optional)
+          <input id="planned-leaves" type="number" min="0" value="0" />
+        </label>
+      </div>
+
+      <div class="results">
+        <div class="percent-card">
+          <div class="percent-large" id="current-percent">—%</div>
+          <div class="percent-sub">Current Attendance</div>
+        </div>
+
+        <div class="skip-card">
+          <label>Simulate skipping classes:
+            <input id="skip-sim" type="range" min="0" max="10" value="0" />
+          </label>
+          <div class="skip-value">Skip: <span id="skip-value">0</span></div>
+          <div class="sim-result" id="sim-result">New %: —</div>
+          <div class="safe-suggestion" id="safe-suggestion">Safe skip: —</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card subjects-card">
+      <h2>Subjects (up to 7)</h2>
+      <div id="subjects-list" class="subjects-list">
+        <!-- subject cards appended here -->
+      </div>
+      <small class="hint">Click a subject to edit. Long-press (or click three dots) to remove.</small>
+    </section>
+
+    <footer class="footer">
+      <div>Made with ✨ — pastel vibes & offline support</div>
+      <div class="credits">PWA-ready • Local only (no server required)</div>
+    </footer>
+  </main>
+
+  <template id="subject-template">
+    <div class="subject-card">
+      <div class="subject-header">
+        <div class="subject-title">Subject</div>
+        <div class="subject-actions">
+          <button class="btn small edit-btn">Edit</button>
+          <button class="btn small danger remove-btn">Remove</button>
+        </div>
+      </div>
+      <div class="subject-body">
+        <div class="subject-stats">
+          <div>Attended: <span class="attended">0</span></div>
+          <div>Total: <span class="total">0</span></div>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" style="width:0%"></div>
+        </div>
+        <div class="subject-controls">
+          <label>Attended
+            <input class="input-attended" type="number" min="0" value="0" />
+          </label>
+          <label>Total
+            <input class="input-total" type="number" min="0" value="0" />
+          </label>
+        </div>
+      </div>
+    </div>
+  </template>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AttendX</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📅 AttendX</h1>
+        <p class="subtitle">Your minimalist attendance tracker</p>
+
+        <div class="input-section">
+            <label>Total Classes:</label>
+            <input type="number" id="totalClasses" placeholder="Enter total classes">
+
+            <label>Attended Classes:</label>
+            <input type="number" id="attendedClasses" placeholder="Enter attended classes">
+
+            <label>Classes You Plan to Skip:</label>
+            <input type="number" id="skipClasses" placeholder="Enter classes to skip">
+        </div>
+
+        <button onclick="calculateAttendance()">Check Attendance</button>
+
+        <div class="result" id="result"></div>
+
+        <hr>
+
+        <h2>📚 Per Subject Tracker</h2>
+        <div id="subjectsContainer"></div>
+        <button onclick="addSubject()">+ Add Subject</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+
+
+  
+  <script src="script.js"></script>
+
+</body>
+</html>
