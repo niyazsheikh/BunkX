@@ -35,6 +35,24 @@ function addSubject(){
     addedSubjects++;
 }
 
+function showAttendance(attendance) {
+  const valueSpan = document.getElementById("attendance-value");
+
+  valueSpan.textContent = `${attendance.toFixed(2)}%`;
+
+  // Remove previous color classes
+  valueSpan.classList.remove("green", "orange", "red");
+
+  // Add appropriate color class
+  if (attendance >= 75) {
+    valueSpan.classList.add("green");
+  } else if (attendance >= 65) {
+    valueSpan.classList.add("orange");
+  } else {
+    valueSpan.classList.add("red");
+  }
+}
+
 // Open subject-wise attendance in new tab
 function openSubjectAttendance(){
     let subjectData = [];
