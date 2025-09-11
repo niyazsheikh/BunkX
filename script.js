@@ -34,7 +34,9 @@ function addSubject(){
     subjectsContainer.appendChild(div);
     addedSubjects++;
 }
-
+chatbot_id="68c2579c4a347986e2d23290"
+    data-type="default"
+    src="https://app.thinkstack.ai/bot/thinkstackai-loader.min.js"
 function showAttendance(attendance) {
   const valueSpan = document.getElementById("attendance-value");
 
@@ -78,3 +80,4 @@ function openSubjectAttendance(){
     });
     newWin.document.write("</body></html>");
 }
+
