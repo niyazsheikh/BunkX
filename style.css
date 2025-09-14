@@ -8,22 +8,38 @@
 }
 
 body {
-  background: linear-gradient(to right, #d62d91, #3b2fc9); /* Pink to blue gradient */
+  background: black;  /* solid black background */
   color: white;
   padding: 20px;
+  position: relative;
+  z-index: 1;
 }
 
-/* Force all text elements to white */
+#particle-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0;   /* keep particles behind content */
+  overflow: hidden;
+}
+
+body::before {
+  content: none; /* remove gradient overlay */
+}
+
+
 h1, h2, h3, h4, h5, h6,
 p, span, a, li, td, th,
 label, input, button, select, textarea {
   color: white !important;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
 }
 
 header {
-  background-color: transparent;
-  padding: 20px;
   text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 header img {
@@ -35,25 +51,25 @@ header img {
   font-size: 1.8rem;
   font-weight: 600;
   margin-top: 20px;
-  color: white;
-}
-
-h2, #overallResult, #subjectResult {
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: white;
 }
 
 .card, .subject-block {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid white;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
-  color: white;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 label {
@@ -67,10 +83,10 @@ input, textarea, select {
   padding: 10px;
   margin-top: 5px;
   margin-bottom: 15px;
-  border: 1px solid white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 6px;
   font-size: 16px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.15);
   color: white;
 }
 
@@ -100,22 +116,12 @@ button:hover {
 
 .link-btn:hover {
   background-color: rgba(255, 255, 255, 0.2);
-  color: white;
-}
-
-.label, .value {
-  font-weight: bold;
-  color: white;
-}
-
-.green, .orange, .red {
-  font-weight: bold;
-  color: white;
 }
 
 footer {
   text-align: center;
   margin-top: 20px;
   font-size: 0.9rem;
-  color: white;
+  position: relative;
+  z-index: 1;
 }
