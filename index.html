@@ -69,73 +69,10 @@
 
   <footer>© 2025 AttendX. All Rights Reserved.</footer>
 
-  <script>
-    function showPage(pageId) {
-      document.getElementById('overallPage').style.display = 'none';
-      document.getElementById('subjectPage').style.display = 'none';
-      document.getElementById(pageId).style.display = 'block';
-    }
-
-    function calculateOverall() {
-      let attended = parseFloat(document.getElementById("attended").value);
-      let taken = parseFloat(document.getElementById("taken").value);
-      let skip = parseFloat(document.getElementById("skip").value);
-
-      if (isNaN(attended) || isNaN(taken) || isNaN(skip) || taken === 0) {
-        document.getElementById("overallResult").innerHTML = "Please fill all fields correctly.";
-        return;
-      }
-
-      let newAttendance = (attended / (taken + skip)) * 100;
-      document.getElementById("overallResult").innerHTML = "New Attendance: " + newAttendance.toFixed(2) + "%";
-    }
-
-    let subjectCount = 0;
-    function addSubject() {
-      subjectCount++;
-      let container = document.getElementById("subjectContainer");
-
-      let div = document.createElement("div");
-      div.classList.add("subject-block");
-      div.innerHTML = `
-        <label>Subject ${subjectCount} Name</label>
-        <input type="text" placeholder="e.g. DBMS" class="subName" />
-        <label>Attended Classes</label>
-        <input type="number" placeholder="e.g. 30" class="subAttended" />
-        <label>Total Classes</label>
-        <input type="number" placeholder="e.g. 40" class="subTotal" />
-      `;
-
-      container.appendChild(div);
-    }
-
-    function calculateSubject() {
-      let names = document.querySelectorAll(".subName");
-      let attended = document.querySelectorAll(".subAttended");
-      let total = document.querySelectorAll(".subTotal");
-
-      let results = "";
-      for (let i = 0; i < names.length; i++) {
-        let subName = names[i].value || `Subject ${i+1}`;
-        let subAtt = parseFloat(attended[i].value);
-        let subTot = parseFloat(total[i].value);
-
-        if (isNaN(subAtt) || isNaN(subTot) || subTot === 0) {
-          results += `${subName}: Invalid data<br>`;
-        } else {
-          let percentage = (subAtt / subTot) * 100;
-          results += `${subName}: ${percentage.toFixed(2)}%<br>`;
-        }
-      }
-      document.getElementById("subjectResult").innerHTML = results || "Please add subjects and enter valid data.";
-    }
-    
-    
-
-    addSubject(); // Load one subject block by default
-  </script>
+  
 </body>
 </html>
+
 
 
 
