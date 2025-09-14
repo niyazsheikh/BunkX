@@ -3,25 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>BunkX - Attendance Calculators</title>
+  <title>BunkX - Attendance Calculators</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="shortcut icon" href="/newlogo.png" type="image/png" />
-
-
-
 </head>
 <body>
+  <div id="particle-container"></div>
 
   <header>
     <img src="logo.png" alt="AttendX Logo" />
     <p class="tagline">BunkX - Brainy Bunks, No Regrets</p>
   </header>
 
-  <!-- Overall Attendance Calculator -->
   <div class="card" id="overallPage">
-    <h2> Predict Subject-Wise Attendance Loss</h2>
+    <h2>Predict Subject-Wise Attendance Loss</h2>
 
     <label>Current Attendance (%)</label>
     <input type="number" id="current" placeholder="e.g. 85" />
@@ -38,110 +35,22 @@
     <button onclick="calculateOverall()">Calculate New Attendance</button>
     <button class="link-btn" onclick="showPage('subjectPage')">Go to Subject-wise Calculator</button>
 
-    <p id="overallResult"></p> 
-    
-<!-- This is a comment -->
-<!--<div class="attendance">
-  <span class="label">Your Attendance:</span>
-  <span id="attendance-value" class="value">--%</span>
-</div>-->
-
-  <!-- Subject-wise Attendance Calculator -->
-  <div class="card" id="subjectPage" style="display:none;">
-    <h2>Subject-wise Attendance Calculator</h2>
-
-    <div id="subjectContainer"></div>
-
-    <button onclick="addSubject()">+ Add Subject</button>
-    <button onclick="calculateSubject()">Calculate All</button>
-    <button class="link-btn" onclick="showPage('overallPage')">Back to Overall Calculator</button>
-
-    <p id="subjectResult"></p> 
-    
+    <p id="overallResult"></p>
   </div>
 
-  <footer>© 2025 AttendX. All Rights Reserved.</footer> 
-  <script>
-    function showPage(pageId) {
-      document.getElementById('overallPage').style.display = 'none';
-      document.getElementById('subjectPage').style.display = 'none';
-      document.getElementById(pageId).style.display = 'block';
-    }
+  <div class="card" id="subjectPage" style="display:none;">
+    <h2>Subject-wise Attendance Calculator</h2>
+    <div id="subjectsContainer"></div>
 
-    function calculateOverall() {
-      let attended = parseFloat(document.getElementById("attended").value);
-      let taken = parseFloat(document.getElementById("taken").value);
-      let skip = parseFloat(document.getElementById("skip").value);
+    <button onclick="addSubject()">+ Add Subject</button>
+    <button onclick="openSubjectAttendance()">View in New Tab</button>
+    <button class="link-btn" onclick="showPage('overallPage')">Back to Overall Calculator</button>
+  </div>
 
-      if (isNaN(attended) || isNaN(taken) || isNaN(skip) || taken === 0) {
-        document.getElementById("overallResult").innerHTML = "Please fill all fields correctly.";
-        return;
-      }
+  <footer>© 2025 AttendX. All Rights Reserved.</footer>
 
-      let newAttendance = (attended / (taken + skip)) * 100;
-      document.getElementById("overallResult").innerHTML = "New Attendance: " + newAttendance.toFixed(2) + "%";
-    }
-
-    let subjectCount = 0;
-    function addSubject() {
-      subjectCount++;
-      let container = document.getElementById("subjectContainer");
-
-      let div = document.createElement("div");
-      div.classList.add("subject-block");
-      div.innerHTML = `
-        <label>Subject ${subjectCount} Name</label>
-        <input type="text" placeholder="e.g. DBMS" class="subName" />
-        <label>Attended Classes</label>
-        <input type="number" placeholder="e.g. 30" class="subAttended" />
-        <label>Total Classes</label>
-        <input type="number" placeholder="e.g. 40" class="subTotal" />
-      `;
-
-      container.appendChild(div);
-    }
-
-    function calculateSubject() {
-      let names = document.querySelectorAll(".subName");
-      let attended = document.querySelectorAll(".subAttended");
-      let total = document.querySelectorAll(".subTotal");
-
-      let results = "";
-      for (let i = 0; i < names.length; i++) {
-        let subName = names[i].value || `Subject ${i+1}`;
-        let subAtt = parseFloat(attended[i].value);
-        let subTot = parseFloat(total[i].value);
-
-        if (isNaN(subAtt) || isNaN(subTot) || subTot === 0) {
-          results += `${subName}: Invalid data<br>`;
-        } else {
-          let percentage = (subAtt / subTot) * 100;
-          results += `${subName}: ${percentage.toFixed(2)}%<br>`;
-        }
-      }
-      document.getElementById("subjectResult").innerHTML = results || "Please add subjects and enter valid data.";
-    }
-    
-    
-
-    addSubject(); // Load one subject block by default
-  </script>
-
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js"></script>
+  <script chatbot_id="68c2579c4a347986e2d23290" data-type="default" src="https://app.thinkstack.ai/bot/thinkstackai-loader.min.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
