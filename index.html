@@ -3,54 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BunkX - Attendance Calculators</title>
+  <title>BunkX - Attendance Calculator</title>
 
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="shortcut icon" href="/newlogo.png" type="image/png" />
-</head>
-<body>
-  <div id="particle-container"></div>
 
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
   <header>
-    <img src="logo.png" alt="AttendX Logo" />
+    <img src="logo.jpg" alt="BunkX Logo" />
     <p class="tagline">BunkX - Brainy Bunks, No Regrets</p>
   </header>
+<div class="scanlines"></div>
 
+<div class="intro-wrap">
+	<div class="noise"></div>
+	<div class="noise noise-moving"></div>
+
+
+
+
+  <!-- Overall Attendance -->
   <div class="card" id="overallPage">
     <h2>Predict Subject-Wise Attendance Loss</h2>
-
-    <label>Current Attendance (%)</label>
-    <input type="number" id="current" placeholder="e.g. 85" />
-
     <label>Total Classes Attended</label>
     <input type="number" id="attended" placeholder="e.g. 40" />
-
     <label>Total Classes Taken</label>
     <input type="number" id="taken" placeholder="e.g. 50" />
-
     <label>Classes to Skip</label>
     <input type="number" id="skip" placeholder="e.g. 2" />
-
     <button onclick="calculateOverall()">Calculate New Attendance</button>
     <button class="link-btn" onclick="showPage('subjectPage')">Go to Subject-wise Calculator</button>
-
     <p id="overallResult"></p>
+    <div class="progress-container">
+      <div class="progress-bar" id="overallProgress"></div>
+    </div>
   </div>
 
+  <!-- Subject-wise Calculator -->
   <div class="card" id="subjectPage" style="display:none;">
     <h2>Subject-wise Attendance Calculator</h2>
     <div id="subjectsContainer"></div>
-
     <button onclick="addSubject()">+ Add Subject</button>
-    <button onclick="openSubjectAttendance()">View in New Tab</button>
+    <button onclick="calculateSubjectAttendance()">Calculate</button>
     <button class="link-btn" onclick="showPage('overallPage')">Back to Overall Calculator</button>
+    <div id="subjectResults"></div>
   </div>
 
-  <footer>© 2025 AttendX. All Rights Reserved.</footer>
+  <footer>© 2025 BunkX. All Rights Reserved.</footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- JS -->
   <script src="script.js"></script>
-  <script chatbot_id="68c2579c4a347986e2d23290" data-type="default" src="https://app.thinkstack.ai/bot/thinkstackai-loader.min.js"></script>
 </body>
 </html>
