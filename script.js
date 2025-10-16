@@ -1,8 +1,3 @@
-// ===== VANTA HALO BACKGROUND =====
-window.addEventListener("DOMContentLoaded", () => {
- 
-});
-
 // ===== PAGE SWITCH =====
 function showPage(id) {
   document.querySelectorAll(".card").forEach(c => c.style.display = "none");
@@ -19,13 +14,13 @@ function updateProgress(bar, value) {
 
 // ===== CONFETTI =====
 function launchConfetti() {
-  const colors=["#FF4C4C","#00FFAA","#FFD700","#00BFFF","#FF69B4","#FF8C00"];
-  for(let i=0;i<80;i++){
-    let conf=document.createElement("div");
-    conf.className="confetti";
-    conf.style.left=Math.random()*window.innerWidth+"px";
-    conf.style.width=conf.style.height=6+Math.random()*6+"px";
-    conf.style.background=colors[Math.floor(Math.random()*colors.length)];
+  const colors = ["#FF4C4C","#00FFAA","#FFD700","#00BFFF","#FF69B4","#FF8C00"];
+  for (let i=0;i<80;i++){
+    let conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.style.left = Math.random() * window.innerWidth + "px";
+    conf.style.width = conf.style.height = 6 + Math.random()*6 + "px";
+    conf.style.background = colors[Math.floor(Math.random()*colors.length)];
     document.body.appendChild(conf);
     conf.animate([
       { transform:`translateY(0px) rotate(0deg)`, opacity:1 },
@@ -42,38 +37,54 @@ function shakeScreen(el=document.body) {
 }
 
 // ===== AUDIO =====
+// Confetti sound
 const soundConfetti = new Audio("https://www.myinstants.com/media/sounds/1gift-confetti.mp3");
-const soundBuzzer = new Audio("https://www.myinstants.com/media/sounds/buzzer_message.mp3");
-
-// Ensure they preload
 soundConfetti.preload = "auto";
+
+// Buzzer sound
+const soundBuzzer = new Audio("https://www.myinstants.com/media/sounds/buzzer_message.mp3");
 soundBuzzer.preload = "auto";
 
+// Warning sound for 75-89%
+const soundWarning = new Audio("https://www.myinstants.com/media/sounds/itsok.mp3");
+soundWarning.preload = "auto";
+
+// Audio unlock flag
 let audioAllowed = false;
-function unlockAudio() {
-  if (!audioAllowed) {
-    // Fully buffer both sounds
-    soundBuzzer.play().then(() => {
-      soundBuzzer.pause();
-      soundBuzzer.currentTime = 0;
-    }).catch(() => {});
 
-    soundConfetti.play().then(() => {
-      soundConfetti.pause();
-      soundConfetti.currentTime = 0;
-    }).catch(() => {});
+// Unlock audio on button/input click
+document.querySelectorAll("button,input").forEach(el => {
+  el.addEventListener("click", () => {
+    if (!audioAllowed) {
+      [soundConfetti, soundBuzzer, soundWarning].forEach(s => {
+        s.play().then(()=>{ s.pause(); s.currentTime=0; }).catch(()=>{});
+      });
+      audioAllowed = true;
+    }
+  }, { once: true });
+});
 
-    audioAllowed = true;
+// ===== PLAY SOUNDS =====
+function playConfettiSound() {
+  if(audioAllowed){
+    soundConfetti.currentTime = 0;
+    soundConfetti.play().catch(e=>console.error("Confetti failed:", e));
   }
 }
 
-["click", "touchstart", "keydown"].forEach(event => {
-  document.body.addEventListener(event, unlockAudio, { once: true });
-});
+function playBuzzerSound() {
+  if(audioAllowed){
+    soundBuzzer.currentTime = 0;
+    soundBuzzer.play().catch(e=>console.error("Buzzer failed:", e));
+  }
+}
 
-function playConfettiSound() { if(audioAllowed) soundConfetti.play().catch(e=>console.error(e)); }
-function playBuzzerSound() { if(audioAllowed) soundBuzzer.play().catch(e=>console.error(e)); }
-
+function playWarningSound() {
+  if(audioAllowed){
+    soundWarning.currentTime = 0;
+    soundWarning.play().catch(e=>console.error("Warning failed:", e));
+  }
+}
 
 // ===== CALCULATE OVERALL =====
 function calculateOverall() {
@@ -97,12 +108,15 @@ function calculateOverall() {
     playConfettiSound();
     result.innerHTML += " 🎉 Excellent Attendance!";
     launchConfetti();
+  } else if(newAtt >= 75 && newAtt < 90){
+    playWarningSound();
+    result.innerHTML += " ⚠️ Good but can improve!";
+    result.style.color = "#FFD700"; // Yellow
   } else if(newAtt < 75){
     playBuzzerSound();
     result.innerHTML += " ⚠️ Low Attendance!";
     shakeScreen();
-  } else {
-    result.style.color = "#FFD700";
+    result.style.color = "#FF4C4C";
   }
 }
 
@@ -113,7 +127,7 @@ let addedSubjects = 0;
 
 function addSubject(){
   if(addedSubjects >= subjects.length) return;
-  let div=document.createElement("div");
+  let div = document.createElement("div");
   div.className="subject-block";
   div.innerHTML=`
     <label>${subjects[addedSubjects]} - Total Classes:</label>
@@ -157,6 +171,8 @@ function calculateSubjectAttendance(){
     if(percentage >= 90){
       playConfettiSound();
       launchConfetti();
+    } else if(percentage >= 75 && percentage < 90){
+      playWarningSound();
     } else if(percentage < 75){
       playBuzzerSound();
       shakeScreen(card);
