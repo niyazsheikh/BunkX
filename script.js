@@ -43,7 +43,7 @@ function shakeScreen(el=document.body) {
 
 // ===== AUDIO =====
 const soundConfetti = new Audio("https://www.myinstants.com/media/sounds/1gift-confetti.mp3");
-const soundBuzzer = new Audio("https://files.catbox.moe/0h8l0p.mp3");
+const soundBuzzer = new Audio("https://www.myinstants.com/media/sounds/buzzer_message.mp3");
 
 // Ensure they preload
 soundConfetti.preload = "auto";
@@ -166,3 +166,4 @@ function calculateSubjectAttendance(){
 
 // Auto-add first subject
 addSubject();
+
