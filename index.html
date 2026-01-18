@@ -23,6 +23,20 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .bg{
+  display: flex;
+  justify-content: center;
+}
+
+.bg img{
+  max-width: 100%;
+  height: auto;
+  display: block;
+  transform: translateX(40px);
+}
+
+  </style>
 </head>
 
 <body>
@@ -42,7 +56,9 @@
       <h1 style="display:none;">
 Check Attendance Drop Before You Bunk
 </h1>
-
+      <div class="bg">
+     <img src="https://i.ibb.co/ZQSsjrW/erasebg-transformed-1.webp" alt="img" border="0">
+      </div>
       <h2>Predict Subject-Wise Attendance Loss</h2>
       <label>Total Classes Attended</label>
       <input type="number" id="attended" placeholder="e.g. 40" />
@@ -78,6 +94,7 @@ Check Attendance Drop Before You Bunk
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
