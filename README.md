@@ -1,31 +1,3 @@
-BunkX – Check Attendance Drop Before You Bunk
-🚀 https://bunkx.vercel.app
-
-Plan smart before skipping classes. Enter your attendance details and instantly see how your percentage will change — including how many classes you can safely bunk while staying above 75%.
-
-Even shorter (great for GitHub About section):
-
-Predict your attendance before you bunk and stay above 75%.
-
-Grammar note (quick correction ✅)
-
-Instead of:
-
-Calculate future attendance drop before you bunk
-
-Better:
-👉 Calculate the future attendance drop before you bunk.
-
-or
-👉 See how your attendance will drop before you bunk.
-
-Want me to plug this perfectly into your README intro section too?
-
-create readmd
-
-Here’s a complete, clean README.md for your GitHub repo with your new tagline and all BunkX features clearly explained.
-You can copy-paste this directly into README.md.
-
 📊 BunkX – Check Attendance Drop Before You Bunk
 
 🚀 Live App: https://bunkx.vercel.app
